@@ -1,0 +1,9 @@
+ +true  = >=   if -> |>
+== +=let 123 2.6 "ch\"uj"
+token
+let number = 3;
+let sum = number + 1
+if(sum >= 4)
+{
+    do_some_work(1, "parameter");
+}
