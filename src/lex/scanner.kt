@@ -1,5 +1,5 @@
 package lex
-
+import `interface`.*
 class Scanner(val source : String)
 {
     var start : Int = 0

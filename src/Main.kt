@@ -1,7 +1,9 @@
+import `interface`.PrintVisitor
+
 import java.io.BufferedReader
 import lex.*
 import java.io.File
-
+import parse.top_down.Parser
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun process_file(path : String)
@@ -10,6 +12,10 @@ fun process_file(path : String)
     val inputString = bufferedReader.use { it.readText() }
     val lexer : Lexer = Lexer()
     val tokens = lexer.scan(inputString)
+    val parser : Parser = Parser(tokens)
+    val expr = parser.parse()
+    PrintVisitor().print(expr)
+    println()
     for (token in tokens)
     {
         println("Token: ${token.type}, ")

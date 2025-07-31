@@ -1,29 +1,7 @@
 package lex
 
 import javax.naming.directory.InvalidAttributesException
-
-enum class Identifier
-{
-    // Logical Operators
-    AND, OR, XOR, NOT,
-    // Sets
-    INT, BOOLEAN, DOUBLE, VOID, STRING,
-    // Ord + PartialOrd
-    EQ, NEQ, LE, LEQ, GR, GREQ,
-    // Algebraic Ops
-    ASSIGN, ADD, MULT, DIV, MOD,
-    // Control
-    IF, ELSE,
-    // Definitions
-    LET, FUNCTION, TYPE, IDENTIFIER,
-    // Operators (|> instead of "." and -> instead of "for")
-    PIPE, ARROW,
-    // Formating
-    L_BRACE, R_BRACE, L_PAREN, R_PAREN, SEMICOLON, EOF, COMMA,
-    // Error
-    ERR
-}
-class Token(val type : Identifier, val lexme : String, val literal : Any?, val line : Int, val char : Int)
+import `interface`.*
 
 class Lexer
 {
@@ -61,6 +39,9 @@ class Lexer
                 .match(")", Identifier.R_PAREN)
                 .match(",", Identifier.COMMA)
                 .match(";", Identifier.SEMICOLON)
+                .match("-", Identifier.SUB)
+                .match(":", Identifier.COLON)
+                .match("?", Identifier.QUESTION)
                 .match_number()
                 .match_string()
                 .match_identifier()

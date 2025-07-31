@@ -1,0 +1,8 @@
+expression -> ternary (, ternary)*
+ternary -> equality ("?" ternary : ternary)?
+equality -> term (== term)* | term (!= term)*
+term -> factor (+ factor)* | factor (- factor)*
+factor -> unary ("*" unary) | unary (/ unary)*
+unary -> -unary | !unary |primary
+primary -> Int | Double | String | Bool | "(" expression ")"
+
