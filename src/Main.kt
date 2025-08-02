@@ -23,17 +23,16 @@ fun process_file(path : String)
         println("Token: ${token.type}, ")
     }
     val returned_value = Interpreter().evaluate(expr)
-    when(returned_value)
-    {
-        is SupportedLiteral.Double -> println("Double = ${returned_value.double}")
-        is SupportedLiteral.Bool -> println("Bool = ${returned_value.bool}")
-        is SupportedLiteral.Integer -> println("Integer = ${returned_value.int}")
-        is SupportedLiteral.String -> println("String = ${returned_value.str}")
-    }
+    returned_value.print()
 }
 fun process_line(plain_text : String)
 {
-
+    val lexer : Lexer = Lexer()
+    val tokens = lexer.scan(plain_text)
+    val parser : Parser = Parser(tokens)
+    val expr = parser.parse()
+    val result = Interpreter().evaluate(expr)
+    result.print()
 }
 fun main(args : Array<String>) {
     if (args.size > 1)
@@ -47,7 +46,11 @@ fun main(args : Array<String>) {
     else
     {
         println("Running in interactive mode")
-        val input = readln()
-        process_line(input)
+        var input = readln()
+        while (input != "exit")
+        {
+            process_line(input)
+            input = readln()
+        }
     }
 }

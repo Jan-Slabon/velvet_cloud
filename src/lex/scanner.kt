@@ -91,7 +91,7 @@ class Scanner(val source : String)
                 }
                 else
                 {
-                    val string = source.slice(start+1..current_char-2)
+                    val string = source.slice(start+1..current_char-1)
                     token = Token(Identifier.STRING, '"' + string + '"', string, line, char_count)
                     char_count = proposed_line_char_count
                     line = proposed_line_count

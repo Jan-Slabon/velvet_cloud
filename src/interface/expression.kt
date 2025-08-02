@@ -54,6 +54,16 @@ sealed class SupportedLiteral
     abstract fun div(value : SupportedLiteral): SupportedLiteral
     abstract fun compare(value : SupportedLiteral): SupportedLiteral.Bool
     abstract fun less(value : SupportedLiteral): SupportedLiteral.Bool
+    fun print()
+    {
+        when(this)
+        {
+            is SupportedLiteral.Double -> println("Double: ${this.double}")
+            is SupportedLiteral.Bool -> println("Bool: ${this.bool}")
+            is SupportedLiteral.Integer -> println("Integer: ${this.int}")
+            is SupportedLiteral.String -> println("String: ${this.str}")
+        }
+    }
     class Integer(val int : Int) : SupportedLiteral()
     {
         override fun sub(value: SupportedLiteral): SupportedLiteral {
@@ -181,7 +191,7 @@ sealed class SupportedLiteral
         override fun add(value: SupportedLiteral): SupportedLiteral {
             return when(value)
             {
-                is String -> String(value.str + this.str)
+                is String -> String(this.str + value.str)
                 else -> throw Exception("Unsupported right side of String + operator: ${value::class}.")
             }
         }
